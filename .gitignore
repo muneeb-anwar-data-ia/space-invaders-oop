@@ -1,0 +1,9 @@
+# Environnements virtuels
+.venv/
+
+# Cache Python
+__pycache__/
+
+# Éditeurs / OS
+.idea/
+.DS_Store

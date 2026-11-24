@@ -1,0 +1,55 @@
+from pathlib import Path
+
+# Chemins vers les dossiers du projet
+BASE_DIR = Path(__file__).resolve().parent.parent
+ASSETS_DIR = BASE_DIR / "assets"
+IMAGES_DIR = ASSETS_DIR / "images"
+SOUNDS_DIR = ASSETS_DIR / "sounds"
+
+# Chemins des ressources existantes
+BACKGROUND_IMAGE = IMAGES_DIR / "background.png"
+PLAYER_IMAGE = IMAGES_DIR / "player.png"
+ENEMY_IMAGE = IMAGES_DIR / "enemy.png"
+BULLET_IMAGE = IMAGES_DIR / "bullet.png"
+ICON_IMAGE = IMAGES_DIR / "ufo.png"
+BACKGROUND_MUSIC = SOUNDS_DIR / "background.wav"
+LASER_SOUND = SOUNDS_DIR / "laser.wav"
+EXPLOSION_SOUND = SOUNDS_DIR / "explosion.wav"
+
+# Fenêtre et jeu
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+GAME_TITLE = "Space Invader"
+
+# Joueur
+PLAYER_START_X = 370
+PLAYER_START_Y = 480
+PLAYER_SPEED = 5
+PLAYER_MIN_X = 0
+PLAYER_MAX_X = 736
+
+# Ennemis
+NUM_ENEMIES = 6
+ENEMY_MIN_X = 0
+ENEMY_MAX_X = 736
+ENEMY_SPAWN_MIN_Y = 50
+ENEMY_SPAWN_MAX_Y = 150
+ENEMY_SPEED_X = 4
+ENEMY_STEP_Y = 40
+ENEMY_GAME_OVER_Y = 440
+ENEMY_HIDDEN_Y = 2000
+
+# Projectile
+BULLET_START_Y = 480
+BULLET_SPEED_Y = 10
+BULLET_OFFSET_X = 16
+BULLET_OFFSET_Y = 10
+COLLISION_DISTANCE = 27
+
+# Interface (positions et tailles)
+SCORE_POS_X = 10
+SCORE_POS_Y = 10
+SCORE_FONT_SIZE = 32
+GAME_OVER_POS_X = 200
+GAME_OVER_POS_Y = 250
+GAME_OVER_FONT_SIZE = 64
