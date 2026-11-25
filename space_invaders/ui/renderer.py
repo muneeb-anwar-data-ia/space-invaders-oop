@@ -6,6 +6,7 @@ from pygame import mixer
 
 from space_invaders import config
 from space_invaders.core.game import Game, StepEvents
+from space_invaders.core.entities import FastEnemy
 
 
 class PygameRenderer:
@@ -24,6 +25,7 @@ class PygameRenderer:
         self.background = pygame.image.load(str(config.BACKGROUND_IMAGE))
         self.player_img = pygame.image.load(str(config.PLAYER_IMAGE))
         self.enemy_img = pygame.image.load(str(config.ENEMY_IMAGE))
+        self.fast_enemy_img = pygame.image.load(str(config.UFO_IMAGE))
         self.bullet_img = pygame.image.load(str(config.BULLET_IMAGE))
 
         self.score_font = pygame.font.Font("freesansbold.ttf", config.SCORE_FONT_SIZE)
@@ -66,10 +68,17 @@ class PygameRenderer:
         self.screen.blit(self.background, (0, 0))
 
         for enemy in game.enemies:
-            self.screen.blit(self.enemy_img, (enemy.x, enemy.y))
+            if isinstance(enemy, FastEnemy):
+                self.screen.blit(self.fast_enemy_img, (enemy.x, enemy.y))
+            else:
+                self.screen.blit(self.enemy_img, (enemy.x, enemy.y))
 
         if game.bullet.is_fired():
             self.screen.blit(self.bullet_img, (game.bullet.x, game.bullet.y))
+
+        if game.power_bullet.is_fired():
+            pygame.draw.rect(self.screen, (255, 220, 0),
+                             (game.power_bullet.x, game.power_bullet.y, 8, 18))
 
         self.screen.blit(self.player_img, (game.player.x, game.player.y))
 

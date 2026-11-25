@@ -68,12 +68,24 @@ class Enemy(Entity):
             self.y += self.step_y
 
 
+class FastEnemy(Enemy):
+    """Un ennemi qui se déplace plus rapidement que les autres."""
+
+    def __init__(self, x: float | None = None, y: float | None = None) -> None:
+        super().__init__(x, y)
+        self.vx = config.FAST_ENEMY_SPEED_X
+
+    def respawn(self) -> None:
+        super().respawn()
+        self.vx = config.FAST_ENEMY_SPEED_X
+
+
 class Bullet(Entity):
     """Représente le projectile du joueur (états : 'ready' ou 'fire')."""
 
-    def __init__(self) -> None:
+    def __init__(self, speed: float = config.BULLET_SPEED_Y) -> None:
         super().__init__(0.0, float(config.BULLET_START_Y))
-        self.vy: float = float(config.BULLET_SPEED_Y)
+        self.vy: float = float(speed)
         self.state: str = "ready"
 
     def is_ready(self) -> bool:

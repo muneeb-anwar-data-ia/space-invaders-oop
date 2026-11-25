@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from space_invaders import config
-from space_invaders.core.entities import Bullet, Enemy, Player
+from space_invaders.core.entities import Bullet, Enemy, FastEnemy, Player
 
 
 @dataclass
@@ -17,8 +17,14 @@ class Game:
 
     def __init__(self, num_enemies: int = config.NUM_ENEMIES) -> None:
         self.player = Player()
-        self.enemies: list[Enemy] = [Enemy() for _ in range(num_enemies)]
+        self.enemies: list[Enemy] = []
+        for i in range(num_enemies):
+            if i % 3 == 0:
+                self.enemies.append(FastEnemy())
+            else:
+                self.enemies.append(Enemy())
         self.bullet = Bullet()
+        self.power_bullet = Bullet(config.POWER_BULLET_SPEED_Y)
         self.score: int = 0
         self.game_over: bool = False
         self._pending_shot_event: bool = False
@@ -28,6 +34,15 @@ class Game:
         if self.game_over:
             return False
         fired = self.bullet.fire_from(self.player)
+        if fired:
+            self._pending_shot_event = True
+        return fired
+
+    def trigger_power_fire(self) -> bool:
+        """Déclenche le tir spécial si la partie est active."""
+        if self.game_over:
+            return False
+        fired = self.power_bullet.fire_from(self.player)
         if fired:
             self._pending_shot_event = True
         return fired
@@ -63,7 +78,14 @@ class Game:
                 self.score += 1
                 enemy.respawn()
 
+            if self.power_bullet.is_fired() and enemy.distance_to(self.power_bullet) < config.POWER_COLLISION_DISTANCE:
+                events.enemy_hit = True
+                self.power_bullet.reset()
+                self.score += 2
+                enemy.respawn()
+
         # 3. Déplacement du projectile
         self.bullet.update()
+        self.power_bullet.update()
 
         return events

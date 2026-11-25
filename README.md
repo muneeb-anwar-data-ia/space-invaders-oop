@@ -56,13 +56,35 @@ Depuis la racine du projet :
 | :--- | :--- |
 | `Flèche Gauche` (`←`) | Déplacer le vaisseau vers la gauche |
 | `Flèche Droite` (`→`) | Déplacer le vaisseau vers la droite |
-| `Espace` (`Space`) | Tirer un projectile |
+| `Espace` (`Space`) | Tirer un projectile normal |
+| `E` | Tirer un projectile spécial, plus rapide |
 | Fermeture fenêtre (`×`) | Quitter le jeu |
+
+## Nouveautés ajoutées
+
+### Nouvel ennemi : ennemi rapide
+
+Le jeu contient maintenant deux types d'ennemis :
+
+- **Ennemi normal** : se déplace à la vitesse habituelle.
+- **Ennemi rapide** : se déplace plus vite que l'ennemi normal. Il est créé avec la classe `FastEnemy`, qui reprend le fonctionnement de la classe `Enemy`.
+
+Les ennemis rapides apparaissent parmi les ennemis de la partie.
+
+### Nouvelle arme : tir spécial
+
+En plus du projectile normal (touche `Espace`), le joueur peut utiliser un tir spécial avec la touche `E`.
+
+- Le projectile spécial se déplace plus rapidement que le projectile normal.
+- Il est affiché sous la forme d'un petit rectangle jaune.
+- Lorsqu'il touche un ennemi, il rapporte **2 points** au lieu d'un seul.
+
+Les deux types de tirs peuvent être utilisés séparément.
 
 ## Structure du projet
 
 ```text
-space-invaders-poo/
+space-invaders-oop/
 ├── assets/
 │   ├── images/
 │   │   ├── background.png

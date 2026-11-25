@@ -19,6 +19,8 @@ class InputHandler:
                     game.player.move_right()
                 elif event.key == pygame.K_SPACE:
                     game.trigger_fire()
+                elif event.key == pygame.K_e:
+                    game.trigger_power_fire()
 
             elif event.type == pygame.KEYUP:
                 if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
